@@ -36,15 +36,15 @@ jobs:
         name: webpack artifacts
         path: public
     - name: Use Node.js ${{ matrix.node-version }}
-      id: setupNode${{ matrix.node-version }}
+      id: "setupNode${{ matrix.node-version }}"
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: ./package-lock.json
     - name: npm install
-      run: npm install
       if: steps.setupNode{{ matrix.node-version }} != 'true'
+      run: npm install
       env:
         CI: true
     - name: npm test
